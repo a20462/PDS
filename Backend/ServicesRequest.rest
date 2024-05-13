@@ -1,0 +1,37 @@
+// ----- Serviços ---- 
+### Adicionar - Serviço ###
+POST http://localhost:2000/api/services
+Content-Type: application/json
+
+{
+	"tipo" : "Limpeza",
+	"nome" : "Fernando Costa",
+	"email" : "FCosta@gmail.com",
+	"telemovel" : "911222444",
+	"estado" : "Pendente",
+	"modelo" : "2024 Fiat Punto ",
+	"conta" : "20"
+}
+
+### Listagem - TUDO ###
+GET http://localhost:2000/api/services
+
+### Listagem - By ID ###
+GET http://localhost:2000/api/services/6641fe020068a22e6401c124
+
+### Apagar - By ID ###
+DELETE http://localhost:2000/api/services/6641fe020068a22e6401c124
+
+### Atualizar - By ID ###
+PUT http://localhost:2000/api/services/6641fbe4da5e40e39c358c48
+Content-Type: application/json
+
+{
+	"tipo" : "Limpeza",
+	"nome" : "Fernando Costa",
+	"email" : "FCosta@gmail.com",
+	"telemovel" : "911222444",
+	"estado" : "Pendente",
+	"modelo" : "2024 Fiat Punto ",
+	"conta" : "20"
+}
