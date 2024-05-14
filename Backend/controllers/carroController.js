@@ -1,6 +1,6 @@
 const { Carro : CarroModel, Carro } = require("../models/carros");
 
-const serviceController = {
+const carroController = {
     //ADICIONAR x
     create: async(req, res) => {
         try {
@@ -16,9 +16,9 @@ const serviceController = {
             preco: req.body.preco,
             cor: req.body.cor,
             }
-            const response = await ServiceModel.create(carro);
+            const response = await CarroModelModel.create(carro);
 
-            res.status(201).json({response, msg: "Servico criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
+            res.status(201).json({response, msg: "Carro criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
         } catch (error) {
             console.log(error)
@@ -41,11 +41,11 @@ const serviceController = {
             const carro = await CarroModel.findById(id);
 
             if(!carro) {
-                res.status(404).json({msg: "Serviço não encontrado"});
+                res.status(404).json({msg: "Carro não encontrado"});
                 return;
             }
 
-            res.json(service);
+            res.json(carro);
         } catch (error) {
             console.log(error)
         }
@@ -57,13 +57,13 @@ const serviceController = {
             const carro = await CarroModel.findById(id);
 
             if(!carro) {
-                res.status(404).json({msg: "Serviço não encontrado"});
+                res.status(404).json({msg: "Carro não encontrado"});
                 return;
             }
 
             const deletedCarro = await CarroModel.findByIdAndDelete(id);
 
-            res.status(200).json({deletedCarro, msg: "Serviço excluído com Sucesso"}); //Exclusões
+            res.status(200).json({deletedCarro, msg: "Carro excluído com Sucesso"}); //Exclusões
 
         } catch (error) {
             console.log(error);
@@ -90,11 +90,11 @@ const serviceController = {
         const updatedCarro = await CarroModel.findByIdAndUpdate(id, carro)
 
         if(!updatedCarro) {
-            res.status(404).json({msg: "Serviço não encontrado"});
+            res.status(404).json({msg: "Carro não encontrado"});
             return;
         }
 
-        res.status(200).json({carro, msg: "Serviço atualizado com sucesso!"})
+        res.status(200).json({carro, msg: "Carro atualizado com sucesso!"})
     },
 };
 
