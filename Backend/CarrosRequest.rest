@@ -1,0 +1,43 @@
+// ----- Carros ---- 
+### Adicionar - Serviço ###
+POST http://localhost:2000/api/carros
+Content-Type: application/json
+
+{
+	"marca": "Ferrari",
+	"modelo": "458 Spyder",
+	"kms": "40100",
+	"combustivel": "Gasolina",
+	"ano": "2018",
+	"caixa": "Automatica",
+	"img": "https://cdn.ferrari.com/cms/network/media/img/resize/5db9875fb6fd1830814db7f1-ferrari-458-italia-architecture15_scont?",
+	"garantia": "dois anos",
+	"preco" : "140680",
+	"cor" : "Red"
+}
+
+### Listagem - TUDO ###
+GET http://localhost:2000/api/carros
+
+### Listagem - By ID ###
+GET http://localhost:2000/api/carros/6641fe020068a22e6401c124
+
+### Apagar - By ID ###
+DELETE http://localhost:2000/api/carros/6641fe020068a22e6401c124
+
+### Atualizar - By ID ###
+PUT http://localhost:2000/api/carros/6641fbe4da5e40e39c358c48
+Content-Type: application/json
+
+{
+	"marca": "Ferrari",
+	"modelo": "458 Spyder",
+	"kms": "40100",
+	"combustivel": "Gasolina",
+	"ano": "2018",
+	"caixa": "Automatica",
+	"img": "https://cdn.ferrari.com/cms/network/media/img/resize/5db9875fb6fd1830814db7f1-ferrari-458-italia-architecture15_scont?",
+	"garantia": "dois anos",
+	"preco" : "140680",
+	"cor" : "Red"
+}
