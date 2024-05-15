@@ -16,7 +16,7 @@ const carroController = {
             preco: req.body.preco,
             cor: req.body.cor,
             }
-            const response = await CarroModelModel.create(carro);
+            const response = await CarroModel.create(carro);
 
             res.status(201).json({response, msg: "Carro criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 

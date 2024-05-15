@@ -9,7 +9,7 @@ const clienteController = {
             email: req.body.email,
             telemovel: req.body.telemovel,
             }
-            const response = await ClienteModeleModel.create(Cliente);
+            const response = await ClienteModel.create(Cliente);
 
             res.status(201).json({response, msg: "Cliente criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
@@ -84,4 +84,4 @@ const clienteController = {
     },
 };
 
-module.exports = ClienteController;
+module.exports = clienteController;

@@ -2,7 +2,7 @@ var mongoose = require ("mongoose");
 
 var { Schema } = mongoose; 
 
-var serviceSchema = new Schema ({
+var serviceSchema = new mongoose.Schema ({
     tipo: { type: String, required: true }, // Limpeza / troca de oleo / manutenção completa etc
     nome: { type: String, required: true }, // João Silva
     email: { type: String, required: true }, // JSilva@gmail.com

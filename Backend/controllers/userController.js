@@ -1,6 +1,6 @@
 const { User : UserModel, User } = require("../models/users");
 
-const serviceController = {
+const userController = {
     //ADICIONAR x
     create: async(req, res) => {
         try {
@@ -8,7 +8,7 @@ const serviceController = {
             UserID: req.body.UserID,
             password: req.body.password,
             }
-            const response = await ServiceModel.create(user);
+            const response = await UserModel.create(user);
 
             res.status(201).json({response, msg: "Usuário criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
