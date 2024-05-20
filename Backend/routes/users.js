@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const userController = require("../controllers/userConstroller")
+const userController = require("../controllers/userController")
 
 // Funções
 
@@ -11,7 +11,7 @@ router.route("/users").get((req, res) => userController.getAll(req, res));
 //LISTAGEM BY ID
 router.route("/users/:id").get((req, res) => userController.get(req, res));
 //APAGAR BY ID
-router.route("/users/:id").delete((req, res) => usereController.delete(req, res));
+router.route("/users/:id").delete((req, res) => userController.delete(req, res));
 //UPDATE BY ID
 router.route("/users/:id").put((req, res) => userController.update(req,res));
 

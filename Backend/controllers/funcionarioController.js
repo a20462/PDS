@@ -1,17 +1,17 @@
-const { Funcionario : FuncionarioModel, Funcionario } = require("../models/funcionarios");
+const { Funcionario : FuncionarioModel, Funcionario } = require("../models/funcionario");
 
 const funcionarioController = {
     //ADICIONAR 
     create: async(req, res) => {
         try {
-            const Funcionario = {
+            const funcionario = {
                 nome: req.body.nome,
                 datanasc: req.body.datanasc,
                 nif: req.body.nif,
                 iban: req.body.iban,
                 telemovel: req.body.telemovel,
             }
-            const response = await FuncionarioModeleModel.create(Funcionario);
+            const response = await FuncionarioModel.create(funcionario);
 
             res.status(201).json({response, msg: "Funcionario criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
@@ -33,14 +33,14 @@ const funcionarioController = {
     get: async (req, res) => {
         try {
             const id = req.params.id
-            const Funcionario = await FuncionarioModel.findById(id);
+            const funcionario = await FuncionarioModel.findById(id);
 
-            if(!Funcionario) {
+            if(!funcionario) {
                 res.status(404).json({msg: "Funcionario não encontrado"});
                 return;
             }
 
-            res.json(Funcionario);
+            res.json(funcionario);
         } catch (error) {
             console.log(error)
         }
@@ -49,9 +49,9 @@ const funcionarioController = {
     delete: async (req, res) => {
         try {
             const id = req.params.id;
-            const Funcionario = await FuncionarioModel.findById(id);
+            const funcionario = await FuncionarioModel.findById(id);
 
-            if(!Funcionario) {
+            if(!funcionario) {
                 res.status(404).json({msg: "Funcionario não encontrado"});
                 return;
             }
@@ -69,7 +69,7 @@ const funcionarioController = {
 
         const id = req.params.id;
 
-        const Funcionario = {
+        const funcionario = {
             nome: req.body.nome,
             datanasc: req.body.datanasc,
             nif: req.body.nif,
@@ -77,7 +77,7 @@ const funcionarioController = {
             telemovel: req.body.telemovel,
         };
 
-        const updatedFuncionario = await FuncionarioModel.findByIdAndUpdate(id, Funcionario)
+        const updatedFuncionario = await FuncionarioModel.findByIdAndUpdate(id, funcionario)
 
         if(!updatedFuncionario) {
             res.status(404).json({msg: "Funcionario não encontrado"});
@@ -88,4 +88,4 @@ const funcionarioController = {
     },
 };
 
-module.exports = FuncionarioController;
+module.exports = funcionarioController;

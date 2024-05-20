@@ -1,15 +1,15 @@
-const { Cliente : ClienteModel, Cliente } = require("../models/clientes");
+const { Cliente : ClienteModel, Cliente } = require("../models/cliente");
 
 const clienteController = {
     //ADICIONAR 
     create: async(req, res) => {
         try {
-            const Cliente = {
+            const cliente = {
             nome: req.body.nome,
             email: req.body.email,
             telemovel: req.body.telemovel,
             }
-            const response = await ClienteModel.create(Cliente);
+            const response = await ClienteModel.create(cliente);
 
             res.status(201).json({response, msg: "Cliente criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
@@ -31,14 +31,14 @@ const clienteController = {
     get: async (req, res) => {
         try {
             const id = req.params.id
-            const Cliente = await ClienteModel.findById(id);
+            const cliente = await ClienteModel.findById(id);
 
-            if(!Cliente) {
+            if(!cliente) {
                 res.status(404).json({msg: "Cliente não encontrado"});
                 return;
             }
 
-            res.json(Cliente);
+            res.json(cliente);
         } catch (error) {
             console.log(error)
         }
@@ -47,9 +47,9 @@ const clienteController = {
     delete: async (req, res) => {
         try {
             const id = req.params.id;
-            const Cliente = await ClienteModel.findById(id);
+            const cliente = await ClienteModel.findById(id);
 
-            if(!Cliente) {
+            if(!cliente) {
                 res.status(404).json({msg: "Cliente não encontrado"});
                 return;
             }
@@ -67,20 +67,20 @@ const clienteController = {
 
         const id = req.params.id;
 
-        const Cliente = {
+        const cliente = {
             nome: req.body.nome,
             email: req.body.email,
             telemovel: req.body.telemovel,
         };
 
-        const updatedCliente = await ClienteModel.findByIdAndUpdate(id, Cliente)
+        const updatedCliente = await ClienteModel.findByIdAndUpdate(id, cliente)
 
         if(!updatedCliente) {
             res.status(404).json({msg: "Cliente não encontrado"});
             return;
         }
 
-        res.status(200).json({Cliente, msg: "Cliente atualizado com sucesso!"})
+        res.status(200).json({cliente, msg: "Cliente atualizado com sucesso!"})
     },
 };
 

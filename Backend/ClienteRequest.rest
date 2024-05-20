@@ -1,0 +1,29 @@
+// ----- Cliente ---- 
+### Adicionar - Serviço ###
+POST http://localhost:2000/api/clientes
+Content-Type: application/json
+
+{
+	"nome": "Miguel Silva",
+	"email": "MSilva@gmail.com",
+	"telemovel": "911222555"
+}
+
+### Listagem - TUDO ###
+GET http://localhost:2000/api/clientes
+
+### Listagem - By ID ###
+GET http://localhost:2000/api/clientes/664b22eabc63c671b771598f
+
+### Apagar - By ID ###
+DELETE http://localhost:2000/api/clientes/664b22eabc63c671b771598f
+
+### Atualizar - By ID ###
+PUT http://localhost:2000/api/clientes/664b1f410c9d86e7377a820f
+Content-Type: application/json
+
+{
+	"nome": "Fernando Santos",
+	"email": "FSantos2@gmail.com",
+	"telemovel": "911222333"
+}

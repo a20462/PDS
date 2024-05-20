@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const clienteController = require("../controllers/clienteConstroller")
+const clienteController = require("../controllers/clienteController")
 
 // Funções
 
@@ -13,6 +13,6 @@ router.route("/clientes/:id").get((req, res) => clienteController.get(req, res))
 //APAGAR BY ID
 router.route("/clientes/:id").delete((req, res) => clienteController.delete(req, res));
 //UPDATE BY ID
-router.route("/clientes/:id").put((req, res) => clienteeController.update(req,res));
+router.route("/clientes/:id").put((req, res) => clienteController.update(req,res));
 
 module.exports = router;

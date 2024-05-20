@@ -1,11 +1,11 @@
-const { User : UserModel, User } = require("../models/users");
+const { User : UserModel, User } = require("../models/user");
 
 const userController = {
     //ADICIONAR x
     create: async(req, res) => {
         try {
             const user = {
-            UserID: req.body.UserID,
+            userid: req.body.userid,
             password: req.body.password,
             }
             const response = await UserModel.create(user);
@@ -67,7 +67,7 @@ const userController = {
         const id = req.params.id;
 
         const user = {
-        UserID: req.body.UserID,
+        userid: req.body.userid,
         password: req.body.password,
 
         }

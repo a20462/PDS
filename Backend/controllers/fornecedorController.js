@@ -1,16 +1,16 @@
-const { Fornecedor : FornecedorModel, Fornecedor } = require("../models/fornecedores");
+const { Fornecedor : FornecedorModel, Fornecedor } = require("../models/fornecedor");
 
 const fornecedorController = {
     //ADICIONAR 
     create: async(req, res) => {
         try {
-            const Fornecedor = {
-                Nome: { type: String, required: true },
-                NIF: { type: Number, required: true },
-                IBAN: { type: Number, required: true },
-                Telemovel: { type: Number, required: true }
+            const fornecedor = {
+                nome: req.body.nome,
+                nif: req.body.nif,
+                iban: req.body.iban,
+                telemovel: req.body.telemovel,
             }
-            const response = await FornecedorModeleModel.create(Fornecedor);
+            const response = await FornecedorModel.create(fornecedor);
 
             res.status(201).json({response, msg: "Fornecedor criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
 
@@ -32,14 +32,14 @@ const fornecedorController = {
     get: async (req, res) => {
         try {
             const id = req.params.id
-            const Fornecedor = await FornecedorModel.findById(id);
+            const fornecedor = await FornecedorModel.findById(id);
 
-            if(!Fornecedor) {
+            if(!fornecedor) {
                 res.status(404).json({msg: "Fornecedor não encontrado"});
                 return;
             }
 
-            res.json(Fornecedor);
+            res.json(fornecedor);
         } catch (error) {
             console.log(error)
         }
@@ -48,9 +48,9 @@ const fornecedorController = {
     delete: async (req, res) => {
         try {
             const id = req.params.id;
-            const Fornecedor = await FornecedorModel.findById(id);
+            const fornecedor = await FornecedorModel.findById(id);
 
-            if(!Fornecedor) {
+            if(!fornecedor) {
                 res.status(404).json({msg: "Fornecedor não encontrado"});
                 return;
             }
@@ -68,14 +68,14 @@ const fornecedorController = {
 
         const id = req.params.id;
 
-        const Fornecedor = {
-            Nome: { type: String, required: true },
-            NIF: { type: Number, required: true },
-            IBAN: { type: Number, required: true },
-            Telemovel: { type: Number, required: true }
+        const fornecedor = {
+            nome: req.body.nome,
+            nif: req.body.nif,
+            iban: req.body.iban,
+            telemovel: req.body.telemovel,
         };
 
-        const updatedFornecedor = await FornecedorModel.findByIdAndUpdate(id, Fornecedor)
+        const updatedFornecedor = await FornecedorModel.findByIdAndUpdate(id, fornecedor)
 
         if(!updatedFornecedor) {
             res.status(404).json({msg: "Fornecedor não encontrado"});
@@ -86,4 +86,4 @@ const fornecedorController = {
     },
 };
 
-module.exports = FornecedorController;
+module.exports = fornecedorController;

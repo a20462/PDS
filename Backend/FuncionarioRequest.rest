@@ -1,0 +1,33 @@
+// ----- Funcionario ---- 
+### Adicionar - Serviço ###
+POST http://localhost:2000/api/funcionarios
+Content-Type: application/json
+
+{
+	"nome": "Henrique Oliveira",
+	"datanasc": "22-04-1989",
+    "nif": "178178179",
+    "iban": "PT0501021312452440",
+	"telemovel": "911222777"
+}
+
+### Listagem - TUDO ###
+GET http://localhost:2000/api/funcionarios
+
+### Listagem - By ID ###
+GET http://localhost:2000/api/funcionarios/664b25a946488c908aa5da07
+
+### Apagar - By ID ###
+DELETE http://localhost:2000/api/funcionarios/664b25a946488c908aa5da07
+
+### Atualizar - By ID ###
+PUT http://localhost:2000/api/funcionarios/664b25a946488c908aa5da07
+Content-Type: application/json
+
+{
+	"nome": "Henrique Oliveira",
+	"datanasc": "22-04-1990",
+    "nif": "178178179",
+    "iban": "PT0501021312452440",
+	"telemovel": "911222777"
+}

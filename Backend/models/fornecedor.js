@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const fornecedorSchema = new Schema ({
-    Nome: { type: String, required: true },
-    NIF: { type: Number, required: true },
-    IBAN: { type: Number, required: true },
-    Telemovel: { type: Number, required: true }
+const fornecedorSchema = new mongoose.Schema ({
+    nome: { type: String, required: true },
+    nif: { type: Number, required: true },
+    iban: { type: String, required: true },
+    telemovel: { type: Number, required: true }
 },
 {timestamps: true} //guarda a data de criação do registo
 );
