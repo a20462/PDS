@@ -1,18 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const clienteSchema = new mongoose.Schema({
+const ClienteSchema = new mongoose.Schema({
     nome: { type: String, required: true },
     email: { type: String, required: true },
     date: { type: String, required: true },
-    telemovel: { type: Number, required: true },
-    nif: { type: Number, required: true },
-},
-{timestamps: true} //guarda a data de criação do registo
-);
+    telemovel: { type: String, required: true },
+    nif: { type: String, required: true },
 
-const Cliente = mongoose.model("Cliente", clienteSchema)
+});
+
+const Cliente = mongoose.model('Cliente', ClienteSchema);
 
 module.exports = {
     Cliente,
-    clienteSchema,
+    ClienteSchema,
 }

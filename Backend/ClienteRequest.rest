@@ -4,9 +4,11 @@ POST http://localhost:2000/api/clientes
 Content-Type: application/json
 
 {
-	"nome": "Miguel Silva",
-	"email": "MSilva@gmail.com",
-	"telemovel": "911222555"
+	"nome": "Artur Marques",
+	"email": "Amarques@gmail.com",
+	"telemovel": "987654321",
+	"date": "7/9/2001",
+	"nif": "248642378"
 }
 
 ### Listagem - TUDO ###

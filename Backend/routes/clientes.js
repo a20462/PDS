@@ -14,9 +14,5 @@ router.route("/clientes/:id").get((req, res) => clienteController.get(req, res))
 router.route("/clientes/:id").delete((req, res) => clienteController.delete(req, res));
 //UPDATE BY ID
 router.route("/clientes/:id").put((req, res) => clienteController.update(req,res));
-//AUTHENTICATION
-/*router.route("/clientes/:id").get('/profile', authenticate, (req, res) => {
-    res.json({ message: `Welcome ${req.user.username}` });
-  });*/
 
 module.exports = router;

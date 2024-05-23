@@ -15,3 +15,23 @@ Content-Type: application/json
   "username": "newuser",
   "password": "newpassword"
 }
+
+### Comprar Carro
+POST http://localhost:2000/api/compras/compra
+Content-Type: application/json
+
+{
+  "clienteNome": "Artur Marques",
+  "carroId": "664cca17e2a8601605cf4ce4"
+}
+
+### Listar Compras
+GET http://localhost:2000/api/compras
+
+### Cancelar Compra
+POST http://localhost:2000/api/compras/cancelar
+Content-Type: application/json
+
+{
+  "carroId": "664cca17e2a8601605cf4ce4"
+}
