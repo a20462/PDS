@@ -1,18 +1,8 @@
-const router = require("express").Router()
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
 
-const userController = require("../controllers/userController")
-
-// Funções
-
-//ADICIONAR
-router.route("/users").post((req, res) => userController.create(req,res)); 
-//LISTAGEM ALL
-router.route("/users").get((req, res) => userController.getAll(req, res));
-//LISTAGEM BY ID
-router.route("/users/:id").get((req, res) => userController.get(req, res));
-//APAGAR BY ID
-router.route("/users/:id").delete((req, res) => userController.delete(req, res));
-//UPDATE BY ID
-router.route("/users/:id").put((req, res) => userController.update(req,res));
+router.post("/signup", userController.signup);
+router.post("/login", userController.login);
 
 module.exports = router;

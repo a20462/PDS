@@ -1,27 +1,17 @@
-// ----- Serviços ---- 
-### Adicionar - Serviço ###
-POST http://localhost:2000/api/users
+### Signup
+POST http://localhost:2000/api/users/signup
 Content-Type: application/json
 
 {
-	"userid" : "admin",
-    "password" : "admin"
+  "username": "newuser",
+  "password": "newpassword"
 }
 
-### Listagem - TUDO ###
-GET http://localhost:2000/api/users
-
-### Listagem - By ID ###
-GET http://localhost:2000/api/users/6641fe020068a22e6401c124
-
-### Apagar - By ID ###
-DELETE http://localhost:2000/api/users/6641fe020068a22e6401c124
-
-### Atualizar - By ID ###
-PUT http://localhost:2000/api/users/6641fbe4da5e40e39c358c48
+### Login
+POST http://localhost:2000/api/users/login
 Content-Type: application/json
 
 {
-	"userid" : "admin",
-    "password" : "admin"
+  "username": "newuser",
+  "password": "newpassword"
 }

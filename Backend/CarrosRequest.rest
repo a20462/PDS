@@ -30,8 +30,8 @@ PUT http://localhost:2000/api/carros/664b236ebc63c671b7715998
 Content-Type: application/json
 
 {
-	"marca": "Porsche",
-	"modelo": "911",
+	"marca": "Volvo",
+	"modelo": "784",
 	"kms": "20000",
 	"combustivel": "Gasolina",
 	"ano": "2022",

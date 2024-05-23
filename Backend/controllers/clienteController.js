@@ -7,7 +7,10 @@ const clienteController = {
             const cliente = {
             nome: req.body.nome,
             email: req.body.email,
-            telemovel: req.body.telemovel,
+            date: req.body.date,
+            telemovel: req.body.nome,
+            nif: req.body.nif,
+            password: req.body.password,
             }
             const response = await ClienteModel.create(cliente);
 
@@ -70,7 +73,10 @@ const clienteController = {
         const cliente = {
             nome: req.body.nome,
             email: req.body.email,
-            telemovel: req.body.telemovel,
+            date: req.body.date,
+            telemovel: req.body.nome,
+            nif: req.body.nif,
+            password: req.body.password,
         };
 
         const updatedCliente = await ClienteModel.findByIdAndUpdate(id, cliente)
