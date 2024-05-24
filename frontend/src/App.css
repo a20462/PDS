@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  text-align: center;
+}
+
+nav {
+  background-color: #282c34;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
