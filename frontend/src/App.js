@@ -36,7 +36,7 @@ function App() {
           <Route path="/sobre" element={<About />} />
         </Routes>
         <header className="header">
-          <img src="./images/background.png" alt="Background" className="background-image" />
+          <img src="/images/background.png" alt="Background" className="background-image" />
           <div className="overlay">
             <h1 className="header-title">The pleasure of driving</h1>
             <img src="/path/to/car.png" alt="Car" className="car-image" />
