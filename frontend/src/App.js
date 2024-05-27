@@ -4,6 +4,8 @@ import About from './pages/Sobre';
 import Contact from './pages/Contato';
 import Viatura from './pages/Viatura';
 import Oficina from './pages/Oficina';
+import Home from './pages/Home';
+import CarroDetalhes from './pages/CarroDetalhes';
 import './App.css';
 
 function App() {
@@ -12,7 +14,9 @@ function App() {
       <div className="App">
         <nav className="navbar">
           <div className="logo">
-            <img src="/images/logo.png" alt="SCF Logo" />
+          <Link to="/home">
+          <img src="/images/logo.png" alt="SCF Logo" />
+          </Link>
           </div>
           <ul className="nav-links">
             <li>
@@ -30,18 +34,13 @@ function App() {
           </ul>
         </nav>
         <Routes>
+          <Route path="/home" element={<Home />} />
           <Route path="/viatura" element={<Viatura />} />
           <Route path="/oficina" element={<Oficina />} />
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
+          <Route path="/carros/:id" element={<CarroDetalhes />} />
         </Routes>
-        <header className="header">
-          <img src="/images/background.png" alt="Background" className="background-image" />
-          <div className="overlay">
-            <h1 className="header-title">The pleasure of driving</h1>
-            <img src="/path/to/car.png" alt="Car" className="car-image" />
-          </div>
-        </header>
       </div>
     </Router>
   );
