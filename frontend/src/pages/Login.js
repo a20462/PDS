@@ -3,14 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => { 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
-            console.log('Sending login request with username:', username, 'and password:', password);
             const response = await axios.post('http://localhost:2000/api/users/login', {
                 username,
                 password,
@@ -19,7 +18,8 @@ const Login = () => {
             alert(response.data.message);
             if (response.status === 200) {
                 // Redirecionar após login bem-sucedido
-                navigate('/Oficinas');
+                navigate('/index');
+                setIsLoggedIn(true); // Define isLoggedIn como true após o login
             }
         } catch (error) {
             console.error('Error:', error);

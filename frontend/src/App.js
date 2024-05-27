@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import About from './pages/Sobre';
 import Contact from './pages/Contato';
@@ -11,17 +12,20 @@ import Fornecedores from './pages/Fornecedores';
 import PedidosRecebidos from './pages/PedidosRecebidos';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
+import Perfil from './pages/Perfil';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
       <div className="App">
         <nav className="navbar">
           <div className="logo">
-          <Link to="/home">
-          <img src="/images/logo.png" alt="SCF Logo" />
-          </Link>
+            <Link to="/home">
+              <img src="/images/logo.png" alt="SCF Logo" />
+            </Link>
           </div>
           <ul className="nav-links">
             <li>
@@ -39,9 +43,15 @@ function App() {
             <li>
               <Link to="/Fornecedores">Fornecedores</Link>
             </li>
-            <li>
-              <Link to="/Login">Login</Link>
-            </li>
+            {isLoggedIn ? (
+              <li>
+                <Link to="/Perfil">Perfil</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
           </ul>
         </nav>
         <Routes>
@@ -54,11 +64,16 @@ function App() {
           <Route path="/Fornecedores" element={<Fornecedores />} />
           <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/Login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
+          <Route path="/Perfil" element={<Perfil />} />
         </Routes>
       </div>
     </Router>
   );
 }
+
 
 export default App;
