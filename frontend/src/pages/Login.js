@@ -10,7 +10,8 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:2000/users/login', {
+            console.log('Sending login request with username:', username, 'and password:', password);
+            const response = await axios.post('http://localhost:2000/api/users/login', {
                 username,
                 password,
             });
@@ -18,7 +19,7 @@ const Login = () => {
             alert(response.data.message);
             if (response.status === 200) {
                 // Redirecionar após login bem-sucedido
-                navigate('/dashboard');
+                navigate('/Oficinas');
             }
         } catch (error) {
             console.error('Error:', error);
