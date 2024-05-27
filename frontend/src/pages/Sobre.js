@@ -3,13 +3,15 @@ import './About.css'
 
 function About() {
   return (
-    <div>
-      <section className="about-section">
+    <div className="about-container">
+      <div className="about-text">
         <p>
           A SCF, guiada pelo lema "The Pleasure of Driving", é mais do que um local de venda de veículos.
         </p>
-        <img src="../carroAbout.png" alt="Carro About" />
-      </section>
+      </div>
+      <div className="about-image">
+        <img src="/images/carroAbout.png" alt="SCF Logo" />
+      </div>
       <TeamSection />
     </div>
   );

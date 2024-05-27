@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './Contato.css';
 
 function Contact() {
+  const [pedido, setPedido] = useState({
+    nome: '',
+    descricao: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPedido(prevPedido => ({
+      ...prevPedido,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:2000/api/pedidos', pedido);
+      alert('Pedido enviado com sucesso!');
+      setPedido({
+        nome: '',
+        descricao: ''
+      });
+    } catch (error) {
+      console.error('Erro ao enviar o pedido:', error);
+      alert('Erro ao enviar o pedido. Por favor, tente novamente.');
+    }
+  };
+
   return (
     <section className="contact-section">
       <h2>Contacte-nos</h2>
@@ -11,20 +40,20 @@ function Contact() {
       <div className="contact-content">
         <div className="contact-form">
           <p>
-            Utilize o formulário abaixo ou as informações de contato fornecidas e permita-nos tornar sua interação conosco tão suave e agradável quanto a própria condução. Estamos ansiosos para ouvir de você!
+            Utilize o formulário abaixo para enviar seu pedido de fornecedor. Estamos ansiosos para ajudá-lo!
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <input type="text" name="name" placeholder="Nome" />
+              <input type="text" name="nome" value={pedido.nome} onChange={handleChange} placeholder="Nome" required />
               <input type="text" name="phone" placeholder="Tel." />
             </div>
             <div className="form-group">
               <input type="email" name="email" placeholder="Email" />
             </div>
             <div className="form-group">
-              <textarea name="message" placeholder="Mensagem"></textarea>
+              <textarea name="descricao" value={pedido.descricao} onChange={handleChange} placeholder="Descreva seu pedido de fornecedor" required></textarea>
             </div>
-            <button type="submit">Contacte-nos</button>
+            <button type="submit">Enviar Pedido</button>
           </form>
         </div>
         <div className="contact-info">
@@ -39,3 +68,4 @@ function Contact() {
 }
 
 export default Contact;
+

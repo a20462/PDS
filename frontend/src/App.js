@@ -7,6 +7,11 @@ import Oficina from './pages/Oficina';
 import Home from './pages/Home';
 import CarroDetalhes from './pages/CarroDetalhes';
 import './App.css';
+import Fornecedores from './pages/Fornecedores';
+import PedidosRecebidos from './pages/PedidosRecebidos';
+import Signup from './pages/SignUp';
+import Login from './pages/Login';
+
 
 function App() {
   return (
@@ -31,6 +36,12 @@ function App() {
             <li>
               <Link to="/sobre">Sobre Nos</Link>
             </li>
+            <li>
+              <Link to="/Fornecedores">Fornecedores</Link>
+            </li>
+            <li>
+              <Link to="/Login">Login</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -40,6 +51,10 @@ function App() {
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes />} />
+          <Route path="/Fornecedores" element={<Fornecedores />} />
+          <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </div>
     </Router>
