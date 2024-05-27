@@ -1,0 +1,98 @@
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: auto;
+  }
+  
+  .search {
+    padding: 5px;
+    margin: 0 20px;
+    border-radius: 15px;
+    border: none;
+  }
+  
+  .nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+  }
+  
+  .main-section {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+  }
+  
+  .car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  
+  .overlay-text h1 {
+    font-size: 48px;
+    margin: 0;
+  }
+  
+  .about-section {
+    padding: 20px;
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+  
+  .about-section p {
+    font-size: 24px;
+  }
+  
+  .team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background-color: black;
+  }
+  
+  .team-member {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .team-member-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: grey;
+  }
+  
+  .team-member p {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
