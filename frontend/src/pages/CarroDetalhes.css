@@ -1,0 +1,27 @@
+.carro-detalhes-container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .carro-imagem img {
+    max-width: 300px;
+    height: auto;
+  }
+  
+  .carro-detalhes {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+  
+  .carro-detalhes h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .carro-detalhes p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
