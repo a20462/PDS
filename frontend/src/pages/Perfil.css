@@ -1,0 +1,82 @@
+.perfil {
+    font-family: Arial, sans-serif;
+  }
+  
+  .logo {
+    font-size: 24px;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: rgb(255, 255, 255);
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  .main-content {
+    padding: 20px;
+  }
+  
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-info-item {
+    margin-bottom: 10px;
+  }
+  
+  .user-info-item label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .user-info-item input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .save-button {
+    display: block;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: rgba(155, 155, 155, 0);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-button:hover {
+    background-color: rgb(79, 78, 78);
+  }
+  
+  .notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .notification {
+    background-color: rgb(48, 48, 48);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

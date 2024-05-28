@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.css';
+import ClienteRegistro from './ClienteRegisto';
 
 const SignUp = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [userData, setUserData] = useState({
+        username: '',
+        password: '',
+        nome: '',
+        email: '',
+        dataNascimento: '',
+        telemovel: '',
+        nif: ''
+    });
+    const [showClienteRegistro, setShowClienteRegistro] = useState(false);
     const navigate = useNavigate();
 
-    const handleSignUp = async () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData({
+            ...userData,
+            [name]: value
+        });
+    };
+
+    const handleSignup = async () => {
         try {
-            const response = await axios.post('http://localhost:2000/api/users/signup', {
-                username,
-                password,
-            });
+            const response = await axios.post('http://localhost:2000/api/users/signup', userData);
             alert(response.data.message);
             if (response.status === 200) {
-                // Redirecionar após login bem-sucedido
-                navigate('/Login');  
+                navigate('/ClienteRegisto');
             }
         } catch (error) {
             if (error.response && error.response.data) {
@@ -29,41 +42,18 @@ const SignUp = () => {
     };
 
     return (
-        <section className="vh-100 SignUp-section">
-            <div className="container">
-                <div className="SignUp-card">
-                    <div className="SignUp-image">
-                        <img
-                            src="https://i.pinimg.com/originals/60/17/ae/6017ae2d8fcc560b97518219b621ac6c.jpg"
-                            alt="SignUp form"
-                        />
-                    </div>
-                    <div className="SignUp-form">
-                        <h2>SCF Auto</h2>
-                        <h5>Faça registo da sua conta.</h5>
-                        <input
-                            type="text"
-                            id="username"
-                            placeholder="Utilizador"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button type="button" onClick={handleSignUp}>
-                            Registar
-                        </button>
-                        <a href="#!" className="small-text">Terms of use.</a>
-                        <a href="#!" className="small-text">Privacy policy</a>
-                    </div>
+        <div>
+            {showClienteRegistro ? (
+                <ClienteRegistro handleSignup={handleSignup} />
+            ) : (
+                <div>
+                    <h2>Registo de Utilizador</h2>
+                    <input type="text" name="username" placeholder="Username" value={userData.username} onChange={handleChange} required />
+                    <input type="password" name="password" placeholder="Password" value={userData.password} onChange={handleChange} required />
+                    <button onClick={() => setShowClienteRegistro(true)}>Registar Cliente</button>
                 </div>
-            </div>
-        </section>
+            )}
+        </div>
     );
 };
 

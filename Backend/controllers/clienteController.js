@@ -10,7 +10,6 @@ const clienteController = {
             date: req.body.date,
             telemovel: req.body.nome,
             nif: req.body.nif,
-            password: req.body.password,
             }
             const response = await ClienteModel.create(cliente);
 
@@ -76,7 +75,6 @@ const clienteController = {
             date: req.body.date,
             telemovel: req.body.nome,
             nif: req.body.nif,
-            password: req.body.password,
         };
 
         const updatedCliente = await ClienteModel.findByIdAndUpdate(id, cliente)

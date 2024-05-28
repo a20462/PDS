@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import About from './pages/Sobre';
 import Contact from './pages/Contato';
@@ -13,10 +12,12 @@ import PedidosRecebidos from './pages/PedidosRecebidos';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
+import ClienteRegistro from './pages/ClienteRegisto';
 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   return (
     <Router>
@@ -64,11 +65,12 @@ function App() {
           <Route path="/Fornecedores" element={<Fornecedores />} />
           <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/ClienteRegisto" element={<ClienteRegistro/>} />
           <Route
             path="/login"
-            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+            element={<Login setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}
           />
-          <Route path="/Perfil" element={<Perfil />} />
+          <Route path="/Perfil" element={<Perfil currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>

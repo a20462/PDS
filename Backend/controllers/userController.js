@@ -5,19 +5,33 @@ const User = require('../models/user');
 
 exports.signup = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const existingUser = await User.findOne({ name: username });
+        const { username, password, nome, email, dataNascimento, telemovel, nif } = req.body;
 
+        // Verifique se o usuário já existe
+        const existingUser = await User.findOne({ name: username });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists. Please choose a different username.' });
         }
 
+        // Crie o cliente associado ao usuário
+        const cliente = new Cliente({
+            nome,
+            email,
+            dataNascimento,
+            telemovel,
+            nif
+        });
+        await cliente.save();
+
+        
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+        // Crie o novo usuário associado ao cliente
         const newUser = new User({
             name: username,
-            password: hashedPassword
+            password: hashedPassword,
+            clientId: cliente._id 
         });
 
         await newUser.save();

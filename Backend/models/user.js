@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Cliente' },
     resetToken: String,
     resetTokenExpiration: Date
 });

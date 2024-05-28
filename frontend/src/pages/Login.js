@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
-const Login = ({ setIsLoggedIn }) => { 
+const Login = ({ setIsLoggedIn, setCurrentUser }) => { 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -18,8 +18,9 @@ const Login = ({ setIsLoggedIn }) => {
             alert(response.data.message);
             if (response.status === 200) {
                 // Redirecionar após login bem-sucedido
-                navigate('/index');
+                navigate('/Perfil');
                 setIsLoggedIn(true); // Define isLoggedIn como true após o login
+                setCurrentUser(response.data.user); // Define o usuário atual
             }
         } catch (error) {
             console.error('Error:', error);
