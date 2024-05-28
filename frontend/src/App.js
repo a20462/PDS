@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import About from './pages/Sobre';
 import Contact from './pages/Contato';
 import Viatura from './pages/Viatura';
@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
+  
     if (loggedIn && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -36,12 +36,19 @@ const App = () => {
     }
   }, []);
 
+  // No frontend, após uma resposta bem-sucedida do backend
   const handleLogin = (userData) => {
     setCurrentUser(userData);
     setIsLoggedIn(true);
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', 'true');
+    
+    // Verifica se o usuário é Admin
+    const isAdminUser = userData.name === 'Admin';
+    setCurrentUser(prevUser => ({ ...prevUser, isAdmin: isAdminUser }));
   };
+  
+  
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -51,6 +58,11 @@ const App = () => {
   };
 
   const isAdmin = currentUser && currentUser.username === 'Admin';
+
+  useEffect(() => {
+    console.log('Current User:', currentUser);
+    console.log('Is Admin:', isAdmin);
+  }, [currentUser, isAdmin]);
 
   return (
     <Router>
@@ -76,9 +88,10 @@ const App = () => {
             </li>
             {isLoggedIn && isAdmin && (
               <li>
-                <Link to="/Oficina">Oficina</Link>
+                <Link to="/oficina">oficina</Link>
               </li>
             )}
+
             {isLoggedIn ? (
               <>
                 <li>
@@ -102,21 +115,23 @@ const App = () => {
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes />} />
-          {isLoggedIn && isAdmin && (
-            <Route path="/Oficina" element={<Oficina />} />
+          {isLoggedIn && isAdmin && currentUser && (
+            <Route path="/oficina" element={<oficina />} />
           )}
           <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/ClienteRegisto" element={<ClienteRegistro />} />
           <Route
             path="/login"
-            element={<Login setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}
+            element={<Login handleLogin={handleLogin} />} // Passando a função handleLogin como prop
           />
+
+
           <Route path="/Perfil" element={<Perfil currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
