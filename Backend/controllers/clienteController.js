@@ -1,4 +1,5 @@
-const { Cliente : ClienteModel, Cliente } = require("../models/cliente");
+const Cliente = require('../models/cliente');
+
 
 const clienteController = {
     //ADICIONAR 
@@ -8,12 +9,12 @@ const clienteController = {
             nome: req.body.nome,
             email: req.body.email,
             date: req.body.date,
-            telemovel: req.body.nome,
+            telemovel: req.body.telemovel,
             nif: req.body.nif,
             }
-            const response = await ClienteModel.create(cliente);
+            const response = await Cliente.create(cliente);
 
-            res.status(201).json({response, msg: "Cliente criado com sucesso!"}); //estado 201 para quando é enviada uma resposta
+            res.status(201).json({response, msg: "Cliente criado com sucesso!"});
 
         } catch (error) {
             console.log(error)

@@ -13,7 +13,7 @@ const Perfil = ({ currentUser }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentUser.id) {
       const fetchUserData = async () => {
         try {
           const response = await fetch(`http://localhost:2000/api/clientes/${currentUser.id}`);
@@ -23,7 +23,7 @@ const Perfil = ({ currentUser }) => {
           console.error('Erro ao buscar dados do cliente:', error);
         }
       };
-
+  
       fetchUserData();
     }
   }, [currentUser]);
@@ -46,7 +46,7 @@ const Perfil = ({ currentUser }) => {
     const apiUrl = `http://localhost:2000/api/clientes/${currentUser.id}`;
 
     fetch(apiUrl, {
-      method: 'PUT', // Assuming you're updating the existing user data
+      method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
       },
@@ -56,7 +56,7 @@ const Perfil = ({ currentUser }) => {
       .then(data => {
         if (data.msg === "Cliente atualizado com sucesso!") {
           alert('Dados salvos com sucesso!');
-          setIsEditing(false); // Switch to view mode after saving
+          setIsEditing(false); 
         } else {
           alert('Erro ao salvar os dados.');
         }

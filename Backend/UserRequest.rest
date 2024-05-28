@@ -3,13 +3,8 @@ POST http://localhost:2000/api/users/signup
 Content-Type: application/json
 
 {
-  "username": "exampleuser",
-  "password": "examplepassword",
-  "nome": "Nome do Cliente",
-  "email": "cliente@example.com",
-  "dataNascimento": "1990-01-01",
-  "telemovel": "123456789",
-  "nif": "123456789"
+  "username": "Marcelo",
+  "password": "Marcelo123"
 }
 
 ### Login

@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+
 const User = require('../models/user');
+const Cliente = require('../models/cliente');
 
 exports.signup = async (req, res) => {
     try {
@@ -23,7 +24,6 @@ exports.signup = async (req, res) => {
         });
         await cliente.save();
 
-        
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -37,9 +37,11 @@ exports.signup = async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully.' });
     } catch (error) {
+        console.error('Error in signup:', error);
         res.status(500).json({ message: 'Server error', error });
     }
 };
+
 
 exports.login = async (req, res) => {
     try {
