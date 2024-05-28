@@ -12,10 +12,12 @@ import Signup from './pages/SignUp';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import ClienteRegistro from './pages/ClienteRegisto';
+import Carrinho from './pages/Carrinho';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -30,7 +32,7 @@ const App = () => {
         }
       } catch (error) {
         console.error('Erro ao parsear o usuário armazenado:', error);
-        handleLogout(); // Limpar dados inválidos do localStorage
+        handleLogout();
       }
     }
   }, []);
@@ -95,9 +97,6 @@ const App = () => {
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link to="/oficina">Oficina</Link>
-                </li>
-                <li>
                   <Link to="/perfil">Perfil</Link>
                 </li>
                 <li>
@@ -109,23 +108,29 @@ const App = () => {
                 <Link to="/login">Login</Link>
               </li>
             )}
+            <li>
+              <Link to="/carrinho">
+                <i className="fas fa-shopping-cart"></i>
+              </Link>
+            </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/viatura" element={<Viatura currentUser={currentUser} />} />
+          <Route path="/viatura" element={<Viatura currentUser={currentUser} cart={cart} setCart={setCart} />} />
           <Route path="/fornecedores" element={isLoggedIn && isAdmin ? <Fornecedores /> : <Home />} />
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
-          <Route path="/carros/:id" element={<CarroDetalhes />} />
-          <Route path="/oficina" element={isLoggedIn ? <Oficina /> : <Home />} />
+          <Route path="/carros/:id" element={<CarroDetalhes cart={cart} setCart={setCart} />} />
+          <Route path="/oficina" element={isLoggedIn && isAdmin ? <Oficina /> : <Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cliente-registo" element={<ClienteRegistro />} />
           <Route
             path="/login"
-            element={<Login handleLogin={handleLogin} />} // Passando a função handleLogin como prop
+            element={<Login handleLogin={handleLogin} />}
           />
           <Route path="/perfil" element={<Perfil currentUser={currentUser} />} />
+          <Route path="/carrinho" element={<Carrinho cart={cart} setCart={setCart} currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>

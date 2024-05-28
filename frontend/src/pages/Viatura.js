@@ -208,7 +208,6 @@ const Viatura = ({ currentUser, cart, setCart }) => {
       <h2>Lista de Carros</h2>
       <div className="row">
         {filteredCarros.map((carro) => (
-<<<<<<< HEAD
           <div key={carro._id} className="col-md-4 mb-4">
             <div className="card">
               <img src={carro.img} className="card-img-top" alt={`${carro.marca} ${carro.modelo}`} />
@@ -223,6 +222,7 @@ const Viatura = ({ currentUser, cart, setCart }) => {
                 <p className="card-text">{carro.cor}</p>
                 <p className="card-text">{carro.dono?.nome || 'Sem dono'}</p>
                 <Link to={`/carros/${carro._id}`} className="btn btn-primary">Ver mais</Link>
+                <button onClick={() => addToCart(carro)}>Adicionar ao Carrinho</button>
                 {isAdmin && (
                   <div className="d-flex justify-content-between mt-2">
                     <button onClick={() => handleEdit(carro)} className="btn btn-warning">Editar</button>
@@ -230,28 +230,6 @@ const Viatura = ({ currentUser, cart, setCart }) => {
                   </div>
                 )}
               </div>
-=======
-          <div key={carro._id} className="car-card">
-            <img src={carro.img} alt={`${carro.marca} ${carro.modelo}`} />
-            <div className="car-info">
-              <h3>{carro.marca} {carro.modelo}</h3>
-              <p>{carro.kms} KMs</p>
-              <p>{carro.combustivel}</p>
-              <p>{carro.ano}</p>
-              <p>{carro.caixa}</p>
-              <p>{carro.garantia}</p>
-              <p>{carro.preco} €</p>
-              <p>{carro.cor}</p>
-              <p>{carro.dono?.nome || 'Sem dono'}</p>
-              <Link to={`/carros/${carro._id}`} className="ver-mais-btn">Ver mais</Link>
-              <button onClick={() => addToCart(carro)}>Adicionar ao Carrinho</button>
-              {isAdmin && (
-                <div className="admin-actions">
-                  <button onClick={() => handleEdit(carro)}>Editar</button>
-                  <button onClick={() => handleDelete(carro._id)}>Deletar</button>
-                </div>
-              )}
->>>>>>> eb55b7821188001f986bd5c038f9a8ba787258fc
             </div>
           </div>
         ))}
