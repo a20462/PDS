@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Viatura.css';
 
-const Viatura = () => {
+const Viatura = ({ currentUser }) => {
   const [carros, setCarros] = useState([]);
   const [filteredCarros, setFilteredCarros] = useState([]);
   const [form, setForm] = useState({
@@ -26,8 +26,9 @@ const Viatura = () => {
     anoAte: '',
     combustivel: ''
   });
-  const [isAdmin, setIsAdmin] = useState(true); // Simulação de verificação de administrador
   const [isEdit, setIsEdit] = useState(false);
+
+  const isAdmin = currentUser && currentUser.username === 'Admin';
 
   useEffect(() => {
     fetchCarros();

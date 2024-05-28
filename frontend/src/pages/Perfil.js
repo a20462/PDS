@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Perfil.css';
+import axios from 'axios';
 
 const Perfil = ({ currentUser }) => {
   const [userData, setUserData] = useState({
@@ -11,22 +12,35 @@ const Perfil = ({ currentUser }) => {
     password: ''
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     if (currentUser && currentUser.id) {
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:2000/api/clientes/${currentUser.id}`);
-          const data = await response.json();
-          setUserData(data);
+          const response = await axios.get(`http://localhost:2000/api/clientes/${currentUser.id}`);
+          setUserData(response.data);
         } catch (error) {
           console.error('Erro ao buscar dados do cliente:', error);
         }
       };
-  
+
       fetchUserData();
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('http://localhost:2000/api/pedidos');
+        setNotifications(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar notificações:', error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,39 +50,36 @@ const Perfil = ({ currentUser }) => {
     });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!currentUser || !currentUser.id) {
       console.error('Erro: usuário não está definido ou não possui um ID.');
       alert('Erro: usuário não está definido ou não possui um ID.');
       return;
     }
 
-    const apiUrl = `http://localhost:2000/api/clientes/${currentUser.id}`;
-
-    fetch(apiUrl, {
-      method: 'PUT', 
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.msg === "Cliente atualizado com sucesso!") {
-          alert('Dados salvos com sucesso!');
-          setIsEditing(false); 
-        } else {
-          alert('Erro ao salvar os dados.');
-        }
-      })
-      .catch(error => {
-        console.error('Erro:', error);
+    try {
+      const response = await axios.put(`http://localhost:2000/api/clientes/${currentUser.id}`, userData);
+      if (response.data.msg === "Cliente atualizado com sucesso!") {
+        alert('Dados salvos com sucesso!');
+        setIsEditing(false); 
+      } else {
         alert('Erro ao salvar os dados.');
-      });
+      }
+    } catch (error) {
+      console.error('Erro ao salvar os dados:', error);
+      alert('Erro ao salvar os dados.');
+    }
   };
 
   const handleEdit = () => {
     setIsEditing(true);
+  };
+
+  const handleVerify = async (id) => {
+    // Lógica para marcar o pedido como verificado
+    console.log(`Pedido verificado: ${id}`);
+    // Remover o pedido verificado
+    setNotifications(notifications.filter(notification => notification._id !== id));
   };
 
   return (
@@ -128,14 +139,13 @@ const Perfil = ({ currentUser }) => {
           </div>
         </div>
         <div className="notifications">
-          <div className="notification">
-            <h3>Pedido #xxxxxxxx</h3>
-            <p>O carro encontra-se pronto para recolha</p>
-          </div>
-          <div className="notification">
-            <h3>Pedido #xxxxxxxx</h3>
-            <p>O serviço encontra-se concluído e pronto para recolha</p>
-          </div>
+          {notifications.map((notification, index) => (
+            <div className="notification" key={index}>
+              <h3>{`Pedido de Parceria: ${notification.nome}`}</h3>
+              <p>{notification.descricao}</p>
+              <button onClick={() => handleVerify(notification._id)}>Verificado</button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

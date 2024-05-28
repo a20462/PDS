@@ -5,6 +5,10 @@ import './Viatura.css';
 
 const Fornecedores = () => {
   const [fornecedores, setFornecedores] = useState([]);
+  const [nome, setNome] = useState('');
+  const [nif, setNIF] = useState('');
+  const [iban, setIBAN] = useState('');
+  const [telemovel, setTelemovel] = useState('');
 
   useEffect(() => {
     fetchFornecedores();
@@ -28,10 +32,47 @@ const Fornecedores = () => {
     }
   };
 
+  const handleAddFornecedor = async () => {
+    try {
+      await axios.post('http://localhost:2000/api/fornecedores', {
+        nome,
+        nif,
+        iban,
+        telemovel
+      });
+      setNome('');
+      setNIF('');
+      setIBAN('');
+      setTelemovel('');
+      fetchFornecedores();
+    } catch (error) {
+      console.error('Erro ao adicionar fornecedor:', error);
+    }
+  };
+
   return (
     <div className="fornecedores-container">
       <h1>Gerenciamento de Fornecedores</h1>
-      <Link to="/adicionar-fornecedor" className="adicionar-fornecedor-btn">Adicionar Fornecedor</Link>
+      <div className="add-fornecedor">
+        <h2>Adicionar Fornecedor</h2>
+        <div className="input-group">
+          <label>Nome:</label>
+          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+        </div>
+        <div className="input-group">
+          <label>NIF:</label>
+          <input type="text" value={nif} onChange={(e) => setNIF(e.target.value)} />
+        </div>
+        <div className="input-group">
+          <label>IBAN:</label>
+          <input type="text" value={iban} onChange={(e) => setIBAN(e.target.value)} />
+        </div>
+        <div className="input-group">
+          <label>Telemóvel:</label>
+          <input type="text" value={telemovel} onChange={(e) => setTelemovel(e.target.value)} />
+        </div>
+        <button onClick={handleAddFornecedor}>Adicionar Fornecedor</button>
+      </div>
       <table>
         <thead>
           <tr>

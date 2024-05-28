@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  
+
     if (loggedIn && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
@@ -42,7 +42,7 @@ const App = () => {
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', 'true');
   };
-  
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
@@ -88,6 +88,9 @@ const App = () => {
                 <li>
                   <Link to="/oficina">Oficina</Link>
                 </li>
+                <li>
+                  <Link to="/viatura">Viatura</Link>
+                </li>
               </>
             )}
             {isLoggedIn ? (
@@ -108,7 +111,7 @@ const App = () => {
         </nav>
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/viatura" element={<Viatura />} />
+          <Route path="/viatura" element={<Viatura currentUser={currentUser} />} />
           <Route path="/fornecedores" element={isLoggedIn && isAdmin ? <Fornecedores /> : <Home />} />
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />

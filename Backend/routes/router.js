@@ -9,6 +9,7 @@ const funcionarioController = require("../controllers/funcionarioController");
 const fornecedorController = require("../controllers/fornecedorController");
 const userController = require("../controllers/userController");
 const compraController = require("../controllers/compraController");
+const pedidoController = require("../controllers/pedidoController");
 
 
 
@@ -20,6 +21,7 @@ const funcionariosRouter = require("./funcionarios")
 const fornecedorRouter = require("./fornecedores")
 const userRoutes = require("./users");
 const compraRoutes = require('./compras');
+const pedidoRoutes = require('./Pedido');
 
 
 
@@ -32,6 +34,7 @@ router.use("/", funcionariosRouter);
 router.use("/", fornecedorRouter);
 router.use("/users", userRoutes);
 router.use("/compras", compraRoutes);
+router.use("/pedidos", pedidoRoutes);
 
 
 router.get("/", (req, res) => {

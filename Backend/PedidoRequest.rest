@@ -1,0 +1,27 @@
+### Criar um novo pedido
+POST http://localhost:2000/api/pedidos
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@example.com",
+  "telefone": "123456789",
+  "descricao": "Pedido de fornecimento de peças para manutenção de veículos."
+}
+
+### Obter todos os pedidos
+GET http://localhost:2000/api/pedidos
+
+### Exemplo de resposta:
+# Status: 200 OK
+[
+    {
+        "_id": "60b64e1b4db7b523c83a19fe",
+        "nome": "João Silva",
+        "email": "joao@example.com",
+        "telefone": "123456789",
+        "descricao": "Pedido de fornecimento de peças para manutenção de veículos.",
+        "__v": 0
+    }
+]
+

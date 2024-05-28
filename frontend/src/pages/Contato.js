@@ -5,8 +5,11 @@ import './Contato.css';
 function Contact() {
   const [pedido, setPedido] = useState({
     nome: '',
+    email: '',
+    telefone: '',
     descricao: ''
   });
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,14 +18,17 @@ function Contact() {
       [name]: value
     }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:2000/api/pedidos', pedido);
+      await axios.post('http://localhost:2000/api/pedidos', pedido); // Atualize a URL para corresponder à sua API
       alert('Pedido enviado com sucesso!');
       setPedido({
         nome: '',
+        email: '',
+        telefone: '',
         descricao: ''
       });
     } catch (error) {
@@ -30,6 +36,7 @@ function Contact() {
       alert('Erro ao enviar o pedido. Por favor, tente novamente.');
     }
   };
+  
 
   return (
     <section className="contact-section">
@@ -43,16 +50,16 @@ function Contact() {
             Utilize o formulário abaixo para enviar seu pedido de fornecedor. Estamos ansiosos para ajudá-lo!
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input type="text" name="nome" value={pedido.nome} onChange={handleChange} placeholder="Nome" required />
-              <input type="text" name="phone" placeholder="Tel." />
-            </div>
-            <div className="form-group">
-              <input type="email" name="email" placeholder="Email" />
-            </div>
-            <div className="form-group">
-              <textarea name="descricao" value={pedido.descricao} onChange={handleChange} placeholder="Descreva seu pedido de fornecedor" required></textarea>
-            </div>
+          <div className="form-group">
+            <input type="text" name="nome" value={pedido.nome} onChange={handleChange} placeholder="Nome" required />
+            <input type="text" name="telefone" value={pedido.telefone} onChange={handleChange} placeholder="Telefone" />
+          </div>
+          <div className="form-group">
+            <input type="email" name="email" value={pedido.email} onChange={handleChange} placeholder="Email" />
+          </div>
+          <div className="form-group">
+            <textarea name="descricao" value={pedido.descricao} onChange={handleChange} placeholder="Descreva seu pedido de fornecedor" required></textarea>
+          </div>
             <button type="submit">Enviar Pedido</button>
           </form>
         </div>
@@ -68,4 +75,3 @@ function Contact() {
 }
 
 export default Contact;
-
