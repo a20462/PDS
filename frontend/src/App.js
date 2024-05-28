@@ -66,7 +66,7 @@ const App = () => {
               <Link to="/viatura">Viatura</Link>
             </li>
             <li>
-              <Link to="/oficina">Oficinas</Link>
+              <Link to="/Fornecedores">Fornecedores</Link>
             </li>
             <li>
               <Link to="/suporte">Suporte</Link>
@@ -76,7 +76,7 @@ const App = () => {
             </li>
             {isLoggedIn && isAdmin && (
               <li>
-                <Link to="/Fornecedores">Fornecedores</Link>
+                <Link to="/Oficina">Oficina</Link>
               </li>
             )}
             {isLoggedIn ? (
