@@ -20,6 +20,7 @@
   
   .carrinho-item .car-info {
     flex-grow: 1;
+    color: white;
   }
   
   .finalizar-compra {

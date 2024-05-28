@@ -103,8 +103,7 @@ const App = () => {
                   <Link to="/perfil">Perfil</Link>
                 </li>
                 <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
+                <button onClick={handleLogout} className="btn btn-secondary rounded-pill btn-sm">Logout</button>                </li>
               </>
             ) : (
               <li>

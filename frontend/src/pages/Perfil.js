@@ -89,58 +89,6 @@ const Perfil = ({ currentUser }) => {
   return (
     <div className="perfil">
       <div className="main-content">
-        <div className="user-info">
-          <div className="user-details">
-            {isEditing ? (
-              <>
-                <div className="user-info-item">
-                  <label>Nome:</label>
-                  <input type="text" name="nome" value={userData.nome} onChange={handleChange} />
-                </div>
-                <div className="user-info-item">
-                  <label>Email:</label>
-                  <input type="email" name="email" value={userData.email} onChange={handleChange} />
-                </div>
-                <div className="user-info-item">
-                  <label>Data de Nascimento:</label>
-                  <input type="date" name="date" value={userData.date} onChange={handleChange} />
-                </div>
-                <div className="user-info-item">
-                  <label>Telemovel:</label>
-                  <input type="tel" name="telemovel" value={userData.telemovel} onChange={handleChange} />
-                </div>
-                <div className="user-info-item">
-                  <label>NIF:</label>
-                  <input type="text" name="nif" value={userData.nif} onChange={handleChange} />
-                </div>
-                <button className="save-button" onClick={handleSave}>Salvar</button>
-              </>
-            ) : (
-              <>
-                <div className="user-info-item">
-                  <label>Nome:</label>
-                  <p>{userData.nome}</p>
-                </div>
-                <div className="user-info-item">
-                  <label>Email:</label>
-                  <p>{userData.email}</p>
-                </div>
-                <div className="user-info-item">
-                  <label>Data de Nascimento:</label>
-                  <p>{userData.date}</p>
-                </div>
-                <div className="user-info-item">
-                  <label>Telemovel:</label>
-                  <p>{userData.telemovel}</p>
-                </div>
-                <div className="user-info-item">
-                  <label>NIF:</label>
-                  <p>{userData.nif}</p>
-                </div>
-                <button className="edit-button" onClick={handleEdit}>Editar</button>
-              </>
-            )}
-          </div>
         </div>
         <div className="notifications">
           {notifications.map((notification, index) => (
@@ -154,8 +102,7 @@ const Perfil = ({ currentUser }) => {
           ))}
         </div>
       </div>
-    </div>
-  );
+  )
 };
 
 export default Perfil;
