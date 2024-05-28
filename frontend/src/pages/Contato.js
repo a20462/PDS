@@ -7,7 +7,8 @@ function Contact() {
     nome: '',
     email: '',
     telefone: '',
-    descricao: ''
+    descricao: '',
+    adminId: '6655ac5c3eafae32078b4d64' 
   });
   
 
@@ -23,13 +24,14 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:2000/api/pedidos', pedido); // Atualize a URL para corresponder à sua API
+      await axios.post('http://localhost:2000/api/pedidos', pedido); 
       alert('Pedido enviado com sucesso!');
       setPedido({
         nome: '',
         email: '',
         telefone: '',
-        descricao: ''
+        descricao: '',
+        adminId: '6655ac5c3eafae32078b4d64' 
       });
     } catch (error) {
       console.error('Erro ao enviar o pedido:', error);

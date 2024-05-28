@@ -8,7 +8,6 @@ import Home from './pages/Home';
 import CarroDetalhes from './pages/CarroDetalhes';
 import './App.css';
 import Fornecedores from './pages/Fornecedores';
-import PedidosRecebidos from './pages/PedidosRecebidos';
 import Signup from './pages/SignUp';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
@@ -117,7 +116,6 @@ const App = () => {
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes />} />
           <Route path="/oficina" element={isLoggedIn && isAdmin ? <Oficina /> : <Home />} />
-          <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cliente-registo" element={<ClienteRegistro />} />
           <Route

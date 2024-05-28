@@ -33,7 +33,9 @@ const Perfil = ({ currentUser }) => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get('http://localhost:2000/api/pedidos');
-        setNotifications(response.data);
+        // Filtrar apenas as notificações destinadas ao administrador
+        const adminNotifications = response.data.filter(notification => notification.destinatario === 'admin');
+        setNotifications(adminNotifications);
       } catch (error) {
         console.error('Erro ao buscar notificações:', error);
       }
@@ -139,10 +141,12 @@ const Perfil = ({ currentUser }) => {
           </div>
         </div>
         <div className="notifications">
+          <h2>Pedidos</h2>
           {notifications.map((notification, index) => (
             <div className="notification" key={index}>
               <h3>{`Pedido de Parceria: ${notification.nome}`}</h3>
               <p>{notification.descricao}</p>
+              <p><strong>Estado do Pedido:</strong> {notification.estado}</p>
               <button onClick={() => handleVerify(notification._id)}>Verificado</button>
             </div>
           ))}
