@@ -63,7 +63,7 @@ const Oficina = () => {
           <div className="col-md-6 mb-3">
             <input type="number" name="conta" value={form.conta} onChange={handleChange} className="form-control" placeholder="Conta" required />
           </div>
-        </div>
+          </div>
         <button type="submit" className="btn btn-primary">Adicionar Serviço</button>
       </form>
     </div>

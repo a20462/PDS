@@ -97,6 +97,9 @@ const App = () => {
             {isLoggedIn ? (
               <>
                 <li>
+                  <Link to="/oficina">Oficina</Link>
+                </li>
+                <li>
                   <Link to="/perfil">Perfil</Link>
                 </li>
                 <li>
@@ -122,7 +125,7 @@ const App = () => {
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes cart={cart} setCart={setCart} />} />
-          <Route path="/oficina" element={isLoggedIn && isAdmin ? <Oficina /> : <Home />} />
+          <Route path="/oficina" element={isLoggedIn ? <Oficina /> : <Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cliente-registo" element={<ClienteRegistro />} />
           <Route
