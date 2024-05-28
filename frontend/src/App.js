@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import About from './pages/Sobre';
 import Contact from './pages/Contato';
 import Viatura from './pages/Viatura';
@@ -14,10 +14,43 @@ import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import ClienteRegistro from './pages/ClienteRegisto';
 
-
-function App() {
+const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (loggedIn && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser) {
+          setCurrentUser(parsedUser);
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.error('Erro ao parsear o usuário armazenado:', error);
+        handleLogout(); // Limpar dados inválidos do localStorage
+      }
+    }
+  }, []);
+
+  const handleLogin = (userData) => {
+    setCurrentUser(userData);
+    setIsLoggedIn(true);
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('isLoggedIn', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('isLoggedIn');
+  };
+
+  const isAdmin = currentUser && currentUser.username === 'Admin';
 
   return (
     <Router>
@@ -41,13 +74,20 @@ function App() {
             <li>
               <Link to="/sobre">Sobre Nos</Link>
             </li>
-            <li>
-              <Link to="/Fornecedores">Fornecedores</Link>
-            </li>
-            {isLoggedIn ? (
+            {isLoggedIn && isAdmin && (
               <li>
-                <Link to="/Perfil">Perfil</Link>
+                <Link to="/Fornecedores">Fornecedores</Link>
               </li>
+            )}
+            {isLoggedIn ? (
+              <>
+                <li>
+                  <Link to="/Perfil">Perfil</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to="/login">Login</Link>
@@ -58,14 +98,16 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/viatura" element={<Viatura />} />
-          <Route path="/oficina" element={<Oficina />} />
+          <Route path="/Fornecedores" element={<Fornecedores />} />
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes />} />
-          <Route path="/Fornecedores" element={<Fornecedores />} />
+          {isLoggedIn && isAdmin && (
+            <Route path="/Oficina" element={<Oficina />} />
+          )}
           <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/ClienteRegisto" element={<ClienteRegistro/>} />
+          <Route path="/ClienteRegisto" element={<ClienteRegistro />} />
           <Route
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}
@@ -76,6 +118,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;
