@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './Viatura.css';
+import './Viatura.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Fornecedores = () => {
   const [fornecedores, setFornecedores] = useState([]);
@@ -51,29 +52,29 @@ const Fornecedores = () => {
   };
 
   return (
-    <div className="fornecedores-container">
+    <div className="container fornecedores-container">
       <h1>Gerenciamento de Fornecedores</h1>
       <div className="add-fornecedor">
         <h2>Adicionar Fornecedor</h2>
-        <div className="input-group">
-          <label>Nome:</label>
-          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+        <div className="mb-3">
+          <label className="form-label">Nome:</label>
+          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="form-control" />
         </div>
-        <div className="input-group">
-          <label>NIF:</label>
-          <input type="text" value={nif} onChange={(e) => setNIF(e.target.value)} />
+        <div className="mb-3">
+          <label className="form-label">NIF:</label>
+          <input type="text" value={nif} onChange={(e) => setNIF(e.target.value)} className="form-control" />
         </div>
-        <div className="input-group">
-          <label>IBAN:</label>
-          <input type="text" value={iban} onChange={(e) => setIBAN(e.target.value)} />
+        <div className="mb-3">
+          <label className="form-label">IBAN:</label>
+          <input type="text" value={iban} onChange={(e) => setIBAN(e.target.value)} className="form-control" />
         </div>
-        <div className="input-group">
-          <label>Telemóvel:</label>
-          <input type="text" value={telemovel} onChange={(e) => setTelemovel(e.target.value)} />
+        <div className="mb-3">
+          <label className="form-label">Telemóvel:</label>
+          <input type="text" value={telemovel} onChange={(e) => setTelemovel(e.target.value)} className="form-control" />
         </div>
-        <button onClick={handleAddFornecedor}>Adicionar Fornecedor</button>
+        <button onClick={handleAddFornecedor} className="btn btn-primary">Adicionar Fornecedor</button>
       </div>
-      <table>
+      <table className="table mt-5">
         <thead>
           <tr>
             <th>Nome</th>
@@ -91,8 +92,8 @@ const Fornecedores = () => {
               <td>{fornecedor.iban}</td>
               <td>{fornecedor.telemovel}</td>
               <td>
-                <Link to={`/editar-fornecedor/${fornecedor._id}`}>Editar</Link>
-                <button onClick={() => handleDelete(fornecedor._id)}>Excluir</button>
+                <Link to={`/editar-fornecedor/${fornecedor._id}`} className="btn btn-warning me-2">Editar</Link>
+                <button onClick={() => handleDelete(fornecedor._id)} className="btn btn-danger">Excluir</button>
               </td>
             </tr>
           ))}

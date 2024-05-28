@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './Viatura.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Viatura = ({ currentUser }) => {
   const [carros, setCarros] = useState([]);
@@ -139,55 +139,94 @@ const Viatura = ({ currentUser }) => {
   };
 
   return (
-    <div className="viatura-container">
-      <h1>Gerenciamento de Carros</h1>
+    <div className="container my-5">
+      <h1 className="mb-4">Gerenciamento de Carros</h1>
       {isAdmin && (
-        <form onSubmit={handleSubmit} className="car-form">
-          <input type="text" name="marca" value={form.marca} onChange={handleChange} placeholder="Marca" required />
-          <input type="text" name="modelo" value={form.modelo} onChange={handleChange} placeholder="Modelo" required />
-          <input type="number" name="kms" value={form.kms} onChange={handleChange} placeholder="KMs" required />
-          <input type="text" name="combustivel" value={form.combustivel} onChange={handleChange} placeholder="Combustível" required />
-          <input type="number" name="ano" value={form.ano} onChange={handleChange} placeholder="Ano" required />
-          <input type="text" name="caixa" value={form.caixa} onChange={handleChange} placeholder="Caixa" required />
-          <input type="text" name="img" value={form.img} onChange={handleChange} placeholder="Imagem URL" required />
-          <input type="text" name="garantia" value={form.garantia} onChange={handleChange} placeholder="Garantia" required />
-          <input type="number" name="preco" value={form.preco} onChange={handleChange} placeholder="Preço" required />
-          <input type="text" name="cor" value={form.cor} onChange={handleChange} placeholder="Cor" required />
-          <button type="submit">{isEdit ? 'Editar Carro' : 'Adicionar Carro'}</button>
+        <form onSubmit={handleSubmit} className="mb-4">
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <input type="text" name="marca" value={form.marca} onChange={handleChange} className="form-control" placeholder="Marca" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="modelo" value={form.modelo} onChange={handleChange} className="form-control" placeholder="Modelo" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="number" name="kms" value={form.kms} onChange={handleChange} className="form-control" placeholder="KMs" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="combustivel" value={form.combustivel} onChange={handleChange} className="form-control" placeholder="Combustível" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="number" name="ano" value={form.ano} onChange={handleChange} className="form-control" placeholder="Ano" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="caixa" value={form.caixa} onChange={handleChange} className="form-control" placeholder="Caixa" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="img" value={form.img} onChange={handleChange} className="form-control" placeholder="Imagem URL" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="garantia" value={form.garantia} onChange={handleChange} className="form-control" placeholder="Garantia" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="number" name="preco" value={form.preco} onChange={handleChange} className="form-control" placeholder="Preço" required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <input type="text" name="cor" value={form.cor} onChange={handleChange} className="form-control" placeholder="Cor" required />
+            </div>
+          </div>
+          <button type="submit" className="btn btn-primary">{isEdit ? 'Editar Carro' : 'Adicionar Carro'}</button>
         </form>
       )}
 
-      <div className="filter-container">
-        <input type="text" name="marca" value={filters.marca} onChange={handleFilterChange} placeholder="Marca" />
-        <input type="text" name="modelo" value={filters.modelo} onChange={handleFilterChange} placeholder="Modelo" />
-        <input type="number" name="anoDe" value={filters.anoDe} onChange={handleFilterChange} placeholder="Ano de" />
-        <input type="number" name="anoAte" value={filters.anoAte} onChange={handleFilterChange} placeholder="Ano até" />
-        <input type="text" name="combustivel" value={filters.combustivel} onChange={handleFilterChange} placeholder="Combustível" />
-        <button onClick={handleFilter}>Pesquisar</button>
+      <div className="mb-4">
+        <h2>Filtrar Carros</h2>
+        <div className="row">
+          <div className="col-md-2 mb-3">
+            <input type="text" name="marca" value={filters.marca} onChange={handleFilterChange} className="form-control" placeholder="Marca" />
+          </div>
+          <div className="col-md-2 mb-3">
+            <input type="text" name="modelo" value={filters.modelo} onChange={handleFilterChange} className="form-control" placeholder="Modelo" />
+          </div>
+          <div className="col-md-2 mb-3">
+            <input type="number" name="anoDe" value={filters.anoDe} onChange={handleFilterChange} className="form-control" placeholder="Ano de" />
+          </div>
+          <div className="col-md-2 mb-3">
+            <input type="number" name="anoAte" value={filters.anoAte} onChange={handleFilterChange} className="form-control" placeholder="Ano até" />
+          </div>
+          <div className="col-md-2 mb-3">
+            <input type="text" name="combustivel" value={filters.combustivel} onChange={handleFilterChange} className="form-control" placeholder="Combustível" />
+          </div>
+          <div className="col-md-2 mb-3">
+            <button onClick={handleFilter} className="btn btn-secondary w-100">Pesquisar</button>
+          </div>
+        </div>
       </div>
 
       <h2>Lista de Carros</h2>
-      <div className="car-grid">
+      <div className="row">
         {filteredCarros.map((carro) => (
-          <div key={carro._id} className="car-card">
-            <img src={carro.img} alt={`${carro.marca} ${carro.modelo}`} />
-            <div className="car-info">
-              <h3>{carro.marca} {carro.modelo}</h3>
-              <p>{carro.kms} KMs</p>
-              <p>{carro.combustivel}</p>
-              <p>{carro.ano}</p>
-              <p>{carro.caixa}</p>
-              <p>{carro.garantia}</p>
-              <p>{carro.preco} €</p>
-              <p>{carro.cor}</p>
-              <p>{carro.dono?.nome || 'Sem dono'}</p>
-              <Link to={`/carros/${carro._id}`} className="ver-mais-btn">Ver mais</Link>
-              {isAdmin && (
-                <div className="admin-actions">
-                  <button onClick={() => handleEdit(carro)}>Editar</button>
-                  <button onClick={() => handleDelete(carro._id)}>Deletar</button>
-                </div>
-              )}
+          <div key={carro._id} className="col-md-4 mb-4">
+            <div className="card">
+              <img src={carro.img} className="card-img-top" alt={`${carro.marca} ${carro.modelo}`} />
+              <div className="card-body">
+                <h5 className="card-title">{carro.marca} {carro.modelo}</h5>
+                <p className="card-text">{carro.kms} KMs</p>
+                <p className="card-text">{carro.combustivel}</p>
+                <p className="card-text">{carro.ano}</p>
+                <p className="card-text">{carro.caixa}</p>
+                <p className="card-text">{carro.garantia}</p>
+                <p className="card-text">{carro.preco} €</p>
+                <p className="card-text">{carro.cor}</p>
+                <p className="card-text">{carro.dono?.nome || 'Sem dono'}</p>
+                <Link to={`/carros/${carro._id}`} className="btn btn-primary">Ver mais</Link>
+                {isAdmin && (
+                  <div className="d-flex justify-content-between mt-2">
+                    <button onClick={() => handleEdit(carro)} className="btn btn-warning">Editar</button>
+                    <button onClick={() => handleDelete(carro._id)} className="btn btn-danger">Deletar</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ))}

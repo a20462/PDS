@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Perfil.css';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Perfil = ({ currentUser }) => {
   const [userData, setUserData] = useState({
@@ -33,9 +34,7 @@ const Perfil = ({ currentUser }) => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get('http://localhost:2000/api/pedidos');
-        // Filtrar apenas as notificações destinadas ao administrador
-        const adminNotifications = response.data.filter(notification => notification.destinatario === 'admin');
-        setNotifications(adminNotifications);
+        setNotifications(response.data);
       } catch (error) {
         console.error('Erro ao buscar notificações:', error);
       }
@@ -78,10 +77,13 @@ const Perfil = ({ currentUser }) => {
   };
 
   const handleVerify = async (id) => {
-    // Lógica para marcar o pedido como verificado
-    console.log(`Pedido verificado: ${id}`);
-    // Remover o pedido verificado
-    setNotifications(notifications.filter(notification => notification._id !== id));
+    try {
+      await axios.put(`http://localhost:2000/api/pedidos/${id}`, { verificado: true });
+      setNotifications(notifications.filter(notification => notification._id !== id));
+    } catch (error) {
+      console.error('Erro ao verificar o pedido:', error);
+      alert('Erro ao verificar o pedido.');
+    }
   };
 
   return (
@@ -141,13 +143,13 @@ const Perfil = ({ currentUser }) => {
           </div>
         </div>
         <div className="notifications">
-          <h2>Pedidos</h2>
           {notifications.map((notification, index) => (
             <div className="notification" key={index}>
               <h3>{`Pedido de Parceria: ${notification.nome}`}</h3>
               <p>{notification.descricao}</p>
-              <p><strong>Estado do Pedido:</strong> {notification.estado}</p>
-              <button onClick={() => handleVerify(notification._id)}>Verificado</button>
+              {currentUser.isAdmin && (
+                <button onClick={() => handleVerify(notification._id)}>Feito</button>
+              )}
             </div>
           ))}
         </div>

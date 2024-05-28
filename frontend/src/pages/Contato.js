@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Contato.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Contact() {
   const [pedido, setPedido] = useState({
@@ -8,9 +9,8 @@ function Contact() {
     email: '',
     telefone: '',
     descricao: '',
-    adminId: '6655ac5c3eafae32078b4d64' 
+    adminId: '6655ac5c3eafae32078b4d64' // ID do administrador
   });
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +19,6 @@ function Contact() {
       [name]: value
     }));
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +37,6 @@ function Contact() {
       alert('Erro ao enviar o pedido. Por favor, tente novamente.');
     }
   };
-  
 
   return (
     <section className="contact-section">
@@ -52,16 +50,16 @@ function Contact() {
             Utilize o formulário abaixo para enviar seu pedido de fornecedor. Estamos ansiosos para ajudá-lo!
           </p>
           <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input type="text" name="nome" value={pedido.nome} onChange={handleChange} placeholder="Nome" required />
-            <input type="text" name="telefone" value={pedido.telefone} onChange={handleChange} placeholder="Telefone" />
-          </div>
-          <div className="form-group">
-            <input type="email" name="email" value={pedido.email} onChange={handleChange} placeholder="Email" />
-          </div>
-          <div className="form-group">
-            <textarea name="descricao" value={pedido.descricao} onChange={handleChange} placeholder="Descreva seu pedido de fornecedor" required></textarea>
-          </div>
+            <div className="form-group">
+              <input type="text" name="nome" value={pedido.nome} onChange={handleChange} placeholder="Nome" required />
+              <input type="text" name="telefone" value={pedido.telefone} onChange={handleChange} placeholder="Telefone" />
+            </div>
+            <div className="form-group">
+              <input type="email" name="email" value={pedido.email} onChange={handleChange} placeholder="Email" />
+            </div>
+            <div className="form-group">
+              <textarea name="descricao" value={pedido.descricao} onChange={handleChange} placeholder="Descreva seu pedido de fornecedor" required></textarea>
+            </div>
             <button type="submit">Enviar Pedido</button>
           </form>
         </div>
