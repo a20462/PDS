@@ -137,7 +137,12 @@ const Viatura = ({ currentUser, cart, setCart }) => {
   };
 
   const addToCart = (carro) => {
-    setCart([...cart, carro]);
+    if (currentUser) {
+      setCart([...cart, carro]);
+    } else {
+      
+      alert("Usuário não logado. Faça o login para adicionar ao carrinho.");
+    }
   };
 
   return (
