@@ -1,0 +1,33 @@
+.carrinho-container {
+    padding: 20px;
+  }
+  
+  .carrinho-lista {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .carrinho-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .carrinho-item img {
+    width: 100px;
+    margin-right: 20px;
+  }
+  
+  .carrinho-item .car-info {
+    flex-grow: 1;
+  }
+  
+  .finalizar-compra {
+    margin-top: 20px;
+  }
+  
+  .continuar-comprando-btn {
+    margin-top: 20px;
+    display: inline-block;
+  }
+  

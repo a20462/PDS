@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Viatura = ({ currentUser }) => {
+const Viatura = ({ currentUser, cart, setCart }) => {
   const [carros, setCarros] = useState([]);
   const [filteredCarros, setFilteredCarros] = useState([]);
   const [form, setForm] = useState({
@@ -79,7 +79,6 @@ const Viatura = ({ currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isEdit) {
-      // Editar carro
       try {
         await axios.put(`http://localhost:2000/api/carros/${form.id}`, form);
         fetchCarros();
@@ -101,7 +100,6 @@ const Viatura = ({ currentUser }) => {
         console.error('Erro ao editar o carro:', error);
       }
     } else {
-      // Adicionar novo carro
       try {
         await axios.post('http://localhost:2000/api/carros', form);
         fetchCarros();
@@ -136,6 +134,10 @@ const Viatura = ({ currentUser }) => {
     } catch (error) {
       console.error('Erro ao deletar o carro:', error);
     }
+  };
+
+  const addToCart = (carro) => {
+    setCart([...cart, carro]);
   };
 
   return (
@@ -206,6 +208,7 @@ const Viatura = ({ currentUser }) => {
       <h2>Lista de Carros</h2>
       <div className="row">
         {filteredCarros.map((carro) => (
+<<<<<<< HEAD
           <div key={carro._id} className="col-md-4 mb-4">
             <div className="card">
               <img src={carro.img} className="card-img-top" alt={`${carro.marca} ${carro.modelo}`} />
@@ -227,6 +230,28 @@ const Viatura = ({ currentUser }) => {
                   </div>
                 )}
               </div>
+=======
+          <div key={carro._id} className="car-card">
+            <img src={carro.img} alt={`${carro.marca} ${carro.modelo}`} />
+            <div className="car-info">
+              <h3>{carro.marca} {carro.modelo}</h3>
+              <p>{carro.kms} KMs</p>
+              <p>{carro.combustivel}</p>
+              <p>{carro.ano}</p>
+              <p>{carro.caixa}</p>
+              <p>{carro.garantia}</p>
+              <p>{carro.preco} €</p>
+              <p>{carro.cor}</p>
+              <p>{carro.dono?.nome || 'Sem dono'}</p>
+              <Link to={`/carros/${carro._id}`} className="ver-mais-btn">Ver mais</Link>
+              <button onClick={() => addToCart(carro)}>Adicionar ao Carrinho</button>
+              {isAdmin && (
+                <div className="admin-actions">
+                  <button onClick={() => handleEdit(carro)}>Editar</button>
+                  <button onClick={() => handleDelete(carro._id)}>Deletar</button>
+                </div>
+              )}
+>>>>>>> eb55b7821188001f986bd5c038f9a8ba787258fc
             </div>
           </div>
         ))}
