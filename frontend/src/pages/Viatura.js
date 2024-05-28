@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Viatura.css';
 
-const Viatura = ({ currentUser }) => {
+const Viatura = ({ currentUser, cart, setCart }) => {
   const [carros, setCarros] = useState([]);
   const [filteredCarros, setFilteredCarros] = useState([]);
   const [form, setForm] = useState({
@@ -79,7 +79,6 @@ const Viatura = ({ currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isEdit) {
-      // Editar carro
       try {
         await axios.put(`http://localhost:2000/api/carros/${form.id}`, form);
         fetchCarros();
@@ -101,7 +100,6 @@ const Viatura = ({ currentUser }) => {
         console.error('Erro ao editar o carro:', error);
       }
     } else {
-      // Adicionar novo carro
       try {
         await axios.post('http://localhost:2000/api/carros', form);
         fetchCarros();
@@ -136,6 +134,10 @@ const Viatura = ({ currentUser }) => {
     } catch (error) {
       console.error('Erro ao deletar o carro:', error);
     }
+  };
+
+  const addToCart = (carro) => {
+    setCart([...cart, carro]);
   };
 
   return (
@@ -182,6 +184,7 @@ const Viatura = ({ currentUser }) => {
               <p>{carro.cor}</p>
               <p>{carro.dono?.nome || 'Sem dono'}</p>
               <Link to={`/carros/${carro._id}`} className="ver-mais-btn">Ver mais</Link>
+              <button onClick={() => addToCart(carro)}>Adicionar ao Carrinho</button>
               {isAdmin && (
                 <div className="admin-actions">
                   <button onClick={() => handleEdit(carro)}>Editar</button>
