@@ -36,20 +36,13 @@ const App = () => {
     }
   }, []);
 
-  // No frontend, após uma resposta bem-sucedida do backend
   const handleLogin = (userData) => {
     setCurrentUser(userData);
     setIsLoggedIn(true);
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', 'true');
-    
-    // Verifica se o usuário é Admin
-    const isAdminUser = userData.name === 'Admin';
-    setCurrentUser(prevUser => ({ ...prevUser, isAdmin: isAdminUser }));
   };
   
-  
-
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
@@ -74,28 +67,33 @@ const App = () => {
             </Link>
           </div>
           <ul className="nav-links">
-            <li>
-              <Link to="/viatura">Viatura</Link>
-            </li>
-            <li>
-              <Link to="/Fornecedores">Fornecedores</Link>
-            </li>
-            <li>
-              <Link to="/suporte">Suporte</Link>
-            </li>
-            <li>
-              <Link to="/sobre">Sobre Nos</Link>
-            </li>
-            {isLoggedIn && isAdmin && (
-              <li>
-                <Link to="/oficina">oficina</Link>
-              </li>
+            {!isAdmin && (
+              <>
+                <li>
+                  <Link to="/viatura">Viatura</Link>
+                </li>
+                <li>
+                  <Link to="/suporte">Suporte</Link>
+                </li>
+                <li>
+                  <Link to="/sobre">Sobre Nós</Link>
+                </li>
+              </>
             )}
-
+            {isLoggedIn && isAdmin && (
+              <>
+                <li>
+                  <Link to="/fornecedores">Fornecedores</Link>
+                </li>
+                <li>
+                  <Link to="/oficina">Oficina</Link>
+                </li>
+              </>
+            )}
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link to="/Perfil">Perfil</Link>
+                  <Link to="/perfil">Perfil</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout}>Logout</button>
@@ -111,23 +109,19 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/viatura" element={<Viatura />} />
-          <Route path="/Fornecedores" element={<Fornecedores />} />
+          <Route path="/fornecedores" element={isLoggedIn && isAdmin ? <Fornecedores /> : <Home />} />
           <Route path="/suporte" element={<Contact />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/carros/:id" element={<CarroDetalhes />} />
-          {isLoggedIn && isAdmin && currentUser && (
-            <Route path="/oficina" element={<oficina />} />
-          )}
+          <Route path="/oficina" element={isLoggedIn && isAdmin ? <Oficina /> : <Home />} />
           <Route path="/pedidos-recebidos" element={<PedidosRecebidos />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/ClienteRegisto" element={<ClienteRegistro />} />
+          <Route path="/cliente-registo" element={<ClienteRegistro />} />
           <Route
             path="/login"
             element={<Login handleLogin={handleLogin} />} // Passando a função handleLogin como prop
           />
-
-
-          <Route path="/Perfil" element={<Perfil currentUser={currentUser} />} />
+          <Route path="/perfil" element={<Perfil currentUser={currentUser} />} />
         </Routes>
       </div>
     </Router>

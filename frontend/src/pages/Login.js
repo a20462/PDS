@@ -1,41 +1,57 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css'; // Assuming you have a CSS file for styling
 
 const Login = ({ handleLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post('http://localhost:2000/api/users/login', {
-      username, // Certifique-se de que `username` corresponde ao nome do campo no backend
-      password,
-    });
-    const userData = response.data;
-    console.log('User Data:', userData); // Verifique o log da resposta do servidor
-    handleLogin(userData); // Usar a função handleLogin para atualizar o estado do usuário
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin({ username, password });
     navigate('/home');
-  } catch (error) {
-    console.error('Erro ao fazer login:', error);
-  }
-};
-
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+    <section className="vh-100 login-section">
+      <div className="container">
+        <div className="login-card">
+          <div className="login-image">
+            <img
+              src="https://i.pinimg.com/originals/60/17/ae/6017ae2d8fcc560b97518219b621ac6c.jpg"
+              alt="login form"
+            />
+          </div>
+          <div className="login-form">
+            <h2>SCF Auto</h2>
+            <h5>Faça login com a sua conta.</h5>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                id="username"
+                placeholder="Utilizador"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button type="submit">Login</button>
+            </form>
+            <p>
+              Ainda não tem conta? <Link to="/signup">Faça o registo aqui!</Link>
+            </p>
+            <a href="#!" className="small-text">Terms of use.</a>
+            <a href="#!" className="small-text">Privacy policy</a>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    </section>
   );
 };
 
